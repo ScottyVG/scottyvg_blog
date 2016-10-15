@@ -1,0 +1,35 @@
+{
+  "name": "scottyvg_blog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "hbs": "~4.0.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "A blogging web application made in node.js",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScottyVG/scottyvg_blog.git"
+  },
+  "keywords": [
+    "node",
+    "postgres",
+    "express"
+  ],
+  "author": "Scott Van Gilder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ScottyVG/scottyvg_blog/issues"
+  },
+  "homepage": "https://github.com/ScottyVG/scottyvg_blog#readme"
+}
