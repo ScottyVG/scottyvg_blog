@@ -28,7 +28,6 @@
     "serve-favicon": "~2.3.0",
     "sessions": "0.0.2-7"
   },
-  "description": "A blogging web application made in node.js",
   "devDependencies": {
     "chai": "^3.5.0",
     "foreman": "^2.0.0",
