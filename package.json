@@ -21,6 +21,7 @@
     "humps": "^1.1.0",
     "knex": "^0.12.5",
     "morgan": "~1.7.0",
+    "nodemon": "^1.11.0",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -28,6 +29,8 @@
     "serve-favicon": "~2.3.0",
     "sessions": "0.0.2-7"
   },
+  "description": "A blogging web application made in node.js",
+  "main": "app.js",
   "devDependencies": {
     "chai": "^3.5.0",
     "foreman": "^2.0.0",
