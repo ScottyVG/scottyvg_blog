@@ -6,7 +6,7 @@
     "knex": "knex",
     "heroku-postbuild": "knex migrate:latest",
     "nf": "nf start",
-    "nodemon": "nodemon app.js",
+    "nodemon": "nodemon server.js",
     "start": "node ./bin/www"
   },
   "dependencies": {
