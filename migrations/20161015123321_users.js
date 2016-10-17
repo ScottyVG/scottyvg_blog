@@ -12,23 +12,3 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema.dropTable('users')
 }
-
-
-// 'use strict';
-//
-// exports.up = (knex) => {
-//   return knex.schema.createTable('users', (table) => {
-//     table.increments();
-//     table.string('first_name');
-//     table.string('last_name');
-//     table.string('image_url');
-//     table.text('bio');
-//     table.string('email').unique().notNullable();
-//     table.specificType('hashed_password', 'char(60)').notNullable();
-//     table.timestamps(true, true);
-//   });
-// };
-//
-// exports.down = (knex) => {
-//   return knex.schema.dropTable('users');
-// };
