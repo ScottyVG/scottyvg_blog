@@ -5,6 +5,7 @@ var posts = require('./posts')
 var comments = require('./comments')
 
 router.get('/', function(req, res) {
+  console.log('start her up');
   res.redirect('/posts')
 })
 
