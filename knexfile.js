@@ -1,12 +1,13 @@
-'use strict';
-
 module.exports = {
+
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/scottyvg_blog_dev'
+    connection: 'postgres://localhost/scottyvg_blog_db',
   },
+
   production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL
-  }
-};
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL + '?ssl=true',
+  },
+
+}

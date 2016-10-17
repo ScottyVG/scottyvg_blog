@@ -1,65 +1,65 @@
-'use strict';
+'use strict'
 
-const express = require('express');
-const router = express.Router();
-const db = require('../db/api');
+var express = require('express')
+var router = express.Router()
+var db = require('../db/api')
 
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
   db.getAllPosts().then(posts => {
     res.render('posts/all', {
-      title: 'Scotty VG\'s Blog: Insights from a madman with a mac.',
+      title: 'Animal Blog: All Posts',
       posts: posts
-    });
-  });
-});
+    })
+  })
+})
 
-router.get('/new', (req, res) => {
+router.get('/new', function(req, res) {
   db.getAllUsers().then(users => {
     res.render('posts/new', {
-      title: 'Scotty VG\'s Blog: New Post',
+      title: 'Animal Blog: Write a Post',
       users: users
-    });
-  });
-});
+    })
+  })
+})
 
-router.get('/:id', (req, res) => {
+router.get('/:id', function(req, res) {
   db.getOnePost(req.params.id).then(post => {
     db.getAllUsers().then(users => {
       res.render('posts/one', {
-        title: 'Scotty VG\'s Blog: ' + post.title,
+        title: 'Animal Blog: ' + post.title,
         post: post,
         users: users
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})
 
-router.post('/', (req, res) => {
+router.post('/', function(req, res) {
   db.createOnePost().then(post => {
-    console.log('post', post);
-    res.redirect('/');
-  });
-});
+    console.log('post', post)
+    res.redirect('/')
+  })
+})
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', function(req, res) {
   db.getOnePost(req.params.id).then(post => {
     res.render('posts/edit', {
-      title: 'Scotty VG\'s Blog: ' + post.title,
+      title: 'Animal Blog: ' + post.title,
       post: post
-    });
-  });
-});
+    })
+  })
+})
 
-router.put('/:id', (req, res) => {
+router.put('/:id', function(req, res) {
   db.updateOnePost(req.params.id).then(() => {
-    res.redirect('/');
-  });
-});
+    res.redirect('/')
+  })
+})
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', function(req, res) {
   db.deleteOnePost(req.params.id).then(() => {
-    res.redirect('/');
-  });
-});
+    res.redirect('/')
+  })
+})
 
-module.exports = router;
+module.exports = router
