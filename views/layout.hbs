@@ -7,17 +7,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <nav class="nav-custom">
-      <div class="nav-wrapper blue nav-custom">
-        <a href="/" class="brand-logo">{{title}}</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="/posts">All Posts</a></li>
-          <li><a href="/users">All Authors</a></li>
-          <li><a href="/users/new">Add an Author</a></li>
-          <li><a href="/posts/new">Write a Post</a></li>
-        </ul>
-      </div>
-    </nav>
+    <nav>
+      <div class="nav-wrapper red">
+        <a href="/" class="brand-logo center blue-text text-darken-4">{{title}}</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down blue-text text-darken-4">
+            <li><a href="/posts">All Posts</a></li>
+            <li><a href="/users">All Authors</a></li>
+            <li><a href="/users/new">Add an Author</a></li>
+            <li><a href="/posts/new">Write a Post</a></li>
+          </ul>
+        </div>
+      </nav>
     <div class="container">
       {{{body}}}
     </div>

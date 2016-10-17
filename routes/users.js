@@ -7,7 +7,7 @@ var db = require('../db/api')
 router.get('/', function(req, res) {
   db.getAllUsers().then(users => {
     res.render('users/all', {
-      title: 'Animal Blog: All Authors',
+      title: 'Scotty VG - Blog: All Authors',
       users: users
     })
   })
@@ -22,7 +22,7 @@ router.get('/new', function(req, res) {
 router.get('/:id', function(req, res) {
   db.getOneUser(req.params.id).then(user => {
     res.render('users/one', {
-      title: 'Animal Blog: ' + user.first_name + ' ' + user.last_name,
+      title: 'Scotty VG - Blog: ' + user.first_name + ' ' + user.last_name,
       user: user
     })
   })

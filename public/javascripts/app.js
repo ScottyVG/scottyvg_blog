@@ -4,17 +4,9 @@ $(document).ready(() => {
   $('select').material_select()
   updatePostListener()
   deletePostListener()
-    // getComments()
 })
 
 var id = parseInt(window.location.pathname.split('/')[2])
-
-// function getComments(){
-//   $.get('/posts/' + id + '/comments')
-//   .then(comments => {
-//     $('.container-custom').append(comments.body)
-//   })
-// }
 
 function updatePostListener() {
   $('.btn-edit-post').click(() => {

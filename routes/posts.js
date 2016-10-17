@@ -7,7 +7,7 @@ var db = require('../db/api')
 router.get('/', function(req, res) {
   db.getAllPosts().then(posts => {
     res.render('posts/all', {
-      title: 'Animal Blog: All Posts',
+      title: 'Scotty VG - Blog: All Posts',
       posts: posts
     })
   })
@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 router.get('/new', function(req, res) {
   db.getAllUsers().then(users => {
     res.render('posts/new', {
-      title: 'Animal Blog: Write a Post',
+      title: 'Scotty VG - Blog: Write a Post',
       users: users
     })
   })
@@ -26,7 +26,7 @@ router.get('/:id', function(req, res) {
   db.getOnePost(req.params.id).then(post => {
     db.getAllUsers().then(users => {
       res.render('posts/one', {
-        title: 'Animal Blog: ' + post.title,
+        title: 'Scotty VG - Blog: ' + post.title,
         post: post,
         users: users
       })
@@ -44,7 +44,7 @@ router.post('/', function(req, res) {
 router.get('/:id/edit', function(req, res) {
   db.getOnePost(req.params.id).then(post => {
     res.render('posts/edit', {
-      title: 'Animal Blog: ' + post.title,
+      title: 'Scotty VG - Blog: ' + post.title,
       post: post
     })
   })
