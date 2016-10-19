@@ -1,6 +1,7 @@
 'use strict'
 
-var knex = require('./knex')
+const bcrypt = require('bcrypt');
+const knex = require('./knex')
 
 module.exports = {
   getAllUsers() {

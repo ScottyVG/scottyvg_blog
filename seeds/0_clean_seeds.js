@@ -1,6 +1,7 @@
 exports.seed = function(knex, Promise) {
   return Promise.all([
-    knex('posts').del(),
+    knex('comment').del(),
+    knex('post').del(),
     knex('users').del(),
   ])
 }
