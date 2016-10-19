@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt')
+const knex = require('./db/knex.js')
+
 //Query Blog db
 getAllBlogs() => {
   return knex('blog')
@@ -14,4 +17,10 @@ getBlogByID(id) => {
 getBlogWithCommentByBlogID(id) {
   return knex('blog')
     .select('blog.id AS blog_id')
+}
+
+module.exports = {
+  getAllBlogs: getAllBlogs,
+  getBlogByID: getBlogByID,
+  getBlogAndCommentsByBlogID: getBlogAndCommentsByBlogID
 }
