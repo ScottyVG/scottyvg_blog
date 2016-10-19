@@ -1,3 +1,5 @@
+'use strict'
+
 const bcrypt = require('bcrypt')
 const knex = require('./db/knex.js')
 
@@ -19,6 +21,12 @@ getBlogWithCommentByBlogID(id) {
     .select('blog.id AS blog_id', 'blog.title', 'blog.content AS blogContent', 'blog.imageURL', 'comment.id AS comment_id', 'comment.user_id AS comment_user', 'comment.content AS comment_content')
     .fullOuterJoin('comment', 'blog.id', 'comment.blog_id')
     .where('blog.id', id)
+}
+
+getBlogByTitle(title) => {
+  return knex('blog')
+    .select('id')
+    .where('title', title)
 }
 
 module.exports = {

@@ -1,4 +1,8 @@
-exports.seed = function(knex, Promise) {
+'use strict'
+
+// TODO: update seeds before seeding
+
+exports.seed = (knex, Promise) => {
   return Promise.all([
     knex('comment').del(),
     knex('post').del(),

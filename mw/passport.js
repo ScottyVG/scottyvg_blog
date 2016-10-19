@@ -1,3 +1,5 @@
+'use strict'
+
 const passport = require('passport')
 const Local = require('passport-local')
 const api = require('./api.js')

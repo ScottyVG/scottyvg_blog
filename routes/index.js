@@ -1,10 +1,12 @@
-var express = require('express')
-var router = express.Router()
-var users = require('./users')
-var posts = require('./posts')
+'use strict'
 
-router.get('/', function(req, res) {
-  console.log('start her up');
+const express = require('express')
+const router = express.Router()
+const users = require('./users')
+const posts = require('./posts')
+
+router.get('/', (req, res) => {
+  // console.log('start her up');
   res.redirect('/posts')
 })
 

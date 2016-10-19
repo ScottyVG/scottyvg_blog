@@ -1,10 +1,10 @@
 'use strict'
 
-var express = require('express')
-var router = express.Router()
-var db = require('../db/api')
+const express = require('express')
+const router = express.Router()
+const db = require('../db/api')
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   db.getAllPosts().then(posts => {
     res.render('posts/all', {
       title: 'Scotty VG - Blog: All Posts',
@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
   })
 })
 
-router.get('/new', function(req, res) {
+router.get('/new', (req, res) => {
   db.getAllUsers().then(users => {
     res.render('posts/new', {
       title: 'Scotty VG - Blog: Write a Post',
@@ -22,7 +22,7 @@ router.get('/new', function(req, res) {
   })
 })
 
-router.get('/:id', function(req, res) {
+router.get('/:id', (req, res) => {
   db.getOnePost(req.params.id).then(post => {
     db.getAllUsers().then(users => {
       res.render('posts/one', {
@@ -34,14 +34,14 @@ router.get('/:id', function(req, res) {
   })
 })
 
-router.post('/', function(req, res) {
+router.post('/', (req, res) => {
   db.createOnePost().then(post => {
     console.log('post', post)
     res.redirect('/')
   })
 })
 
-router.get('/:id/edit', function(req, res) {
+router.get('/:id/edit', (req, res) => {
   db.getOnePost(req.params.id).then(post => {
     res.render('posts/edit', {
       title: 'Scotty VG - Blog: ' + post.title,
@@ -50,13 +50,13 @@ router.get('/:id/edit', function(req, res) {
   })
 })
 
-router.put('/:id', function(req, res) {
+router.put('/:id', (req, res) => {
   db.updateOnePost(req.params.id).then(() => {
     res.redirect('/')
   })
 })
 
-router.delete('/:id', function(req, res) {
+router.delete('/:id', (req, res) => {
   db.deleteOnePost(req.params.id).then(() => {
     res.redirect('/')
   })

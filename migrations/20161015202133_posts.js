@@ -1,3 +1,5 @@
+'use strict'
+
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('blog', (table) => {
     table.increments()

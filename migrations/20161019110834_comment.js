@@ -1,3 +1,5 @@
+'use strict'
+
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('comment', (table) => {
     table.increments()
@@ -7,8 +9,8 @@ exports.up = (knex, Promise) => {
     table.string('user_fullName')
     table.timestamps(null, true)
   })
-};
+}
 
 exports.down = (knex, Promise) => {
   return knex.schema.dropTable('comment')
-};
+}
