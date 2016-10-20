@@ -66,7 +66,7 @@ router.get('/:blogid/editPost', function(req, res, next) {
         .then(function(blogInfo) {
           if (userInfo.id !== blogInfo[0].user_id) {
             res.render('error', {
-              message: "You do not have access to this page.",
+              message: "Access Error: This user does not have permission to access this page.",
               link: url
             })
             return

@@ -9,8 +9,8 @@ passport.use(new Local(function(username, passord, done) {
     .then(function(verified) {
       if (!verified) {
         //Throw Error
-        console.log('Throw error: Incorrect username and/or password')
-        done(new Error('Incorrect username and/or password'))
+        console.log('Access Error: Incorrect username and/or password')
+        done(new Error('Access Error: Incorrect username and/or password'))
         return
       }
       quser.findUser(username)
