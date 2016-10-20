@@ -1,7 +1,7 @@
 'use strict'
 
 const bcrypt = require('bcrypt')
-const knex = require('./db/knex.js')
+const knex = require('../db/knex.js')
 
 //Query Comment db
 function getComments(blog_id) {
