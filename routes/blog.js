@@ -79,7 +79,7 @@ router.get('/:blogid/editPost', function(req, res, next) {
 })
 
 // Post - Edit Blog
-router.post('/:blogid/editiPost', function(req, res, next) {
+router.post('/:blogid/editPost', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -91,8 +91,31 @@ router.post('/:blogid/editiPost', function(req, res, next) {
     })
 })
 
+// Delete Blog Post
+router.get('/:blogid/deletePost', function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.reirect('/login')
+    return
+  }
+  let url = '/' + req.params.blogid
+  quser.findUserInformation(req.user.username)
+    .then(function(userInfo) {
+      if (userInfo.id !== blogInfo[0].user_id) {
+        res.render('error', {
+          message: "Access Error: This user does not have permission to access this page.",
+          link: url
+        })
+        return
+      }
+      qcomment.deleteComments(req.params.blogid).then(function() {
+        qblog.deleteBlogPost(req.params.blogid)
+          .then(function() {
+            res.redirect('/')
+          })
+      })
+    })
+})
 
-// TODO: delete blog
 // TODO: admin delete all blogs (stretch)
 
 
