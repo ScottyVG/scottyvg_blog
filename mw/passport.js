@@ -5,7 +5,7 @@ const Local = require('passport-local')
 const quser = require('./quser.js')
 
 passport.use(new Local(function(username, passord, done) {
-  query.authenticate(username, password)
+  quser.authenticateUser(username, password)
     .then(function(verified) {
       if (!verified) {
         //Throw Error

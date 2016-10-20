@@ -35,7 +35,7 @@ function getBlogByTitle(title) {
     .where('title', title)
 }
 
-createBlogPost(title, content, image, function user_id, user_fullname, snippet) {
+function createBlogPost(title, content, image, user_id, user_fullname, snippet) {
   return knex('blog')
     .insert({
       title: title,
