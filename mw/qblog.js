@@ -23,7 +23,6 @@ getBlogWithCommentByBlogID(id) {
     .where('blog.id', id)
 }
 
-// TODO: add to middleware after this line
 getBlogByTitle(title) => {
   return knex('blog')
     .select('id')
