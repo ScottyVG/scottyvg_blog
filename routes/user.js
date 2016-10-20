@@ -37,3 +37,11 @@ router.post('/login', function(req, res, next) {
     failureRedirect: '/login'
   })
 })
+
+// Logout
+router.get('/logout', function(req, res) => {
+  req.logout()
+  res.redirect('/login')
+})
+
+module.exports = router
