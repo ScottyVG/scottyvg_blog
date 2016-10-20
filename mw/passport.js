@@ -4,28 +4,29 @@ const passport = require('passport')
 const Local = require('passport-local')
 const quser = require('./quser.js')
 
-passport.use(new Local((username, passord, done) => {
+passport.use(new Local(function(username, passord, done) {
   query.authenticate(username, password)
-    .then((verified) => {
+    .then(function(verified) {
       if (!verified) {
+        //Throw Error
         console.log('Throw error: Incorrect username and/or password')
         done(new Error('Incorrect username and/or password'))
         return
       }
       quser.findUser(username)
-        .then((user) => {
+        .then(function(user) {
           done(null, user)
         })
     })
 }))
 
-passport.serializeUser((user, done) => {
+passport.serializeUser(function(user, done) {
   done(null, user.username)
 })
 
-passport.deserializeUser((username, done) => {
+passport.deserializeUser(function(username, done) {
   quser.findUser(username)
-    .then((user) => {
+    .then(function(user) {
       done(null, user)
     })
 })
