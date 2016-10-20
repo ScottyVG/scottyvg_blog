@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 router.use('/user', user)
 router.use('/blog', blog)
-router.use('/users/:id/blog', posts)
+router.use('/users/:id/blog', blog)
 router.use('/comment', comment)
 
 module.exports = router

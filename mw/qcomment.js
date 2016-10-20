@@ -18,7 +18,7 @@ function getCommentsByID(comment) {
     .where('id', comment_id)
 }
 
-createComment(user_id, blog_id, content, function user_fullName) {
+function createComment(user_id, blog_id, content, user_fullName) {
   return knex('comment')
     .insert({
       user_id: user_id,

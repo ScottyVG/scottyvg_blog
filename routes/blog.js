@@ -55,31 +55,45 @@ router.get('/:blogid', function(req, res, next) {
 
 // Render - Edit Blog
 router.get('/:blogid/editPost', function(req, res, next) {
-    if (!req.isAuthenticated()) {
-      res.redirect('/login')
-      return
-    }
-    let url = `/ ${req.params.blogid}`
-    quser.findUserInformation(req.user.username)
-      .then(function(userInfo) {
-        qblog.getBlogById(req.params.blogid)
-          .then(function(blogInfo) {
-            if (userInfo.id !== blogInfo[0].user_id) {
-              res.render('error', {
-                message: "You do not have access to this page.",
-                link: url
-              })
-              return
-            }
-            res.render('edit', {
-              blogInfo: blogInfo
+  if (!req.isAuthenticated()) {
+    res.redirect('/login')
+    return
+  }
+  let url = `/ ${req.params.blogid}`
+  quser.findUserInformation(req.user.username)
+    .then(function(userInfo) {
+      qblog.getBlogById(req.params.blogid)
+        .then(function(blogInfo) {
+          if (userInfo.id !== blogInfo[0].user_id) {
+            res.render('error', {
+              message: "You do not have access to this page.",
+              link: url
             })
+            return
+          }
+          res.render('edit', {
+            blogInfo: blogInfo
           })
-      })
-  })
-  // TODO: edit blog
-  // TODO: delete blog
-  // TODO: admin delete all blogs (stretch)
+        })
+    })
+})
+
+// Post - Edit Blog
+router.post('/:blogid/editiPost', function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.redirect('/login')
+    return
+  }
+  let url = `/ ${req.params.blogid}`
+  qblog.editBlogPost(req.params.blogid, req.ody.title, req.body.content, req.body.image)
+    .then(function() {
+      res.redirect(url)
+    })
+})
+
+
+// TODO: delete blog
+// TODO: admin delete all blogs (stretch)
 
 
 module.exports = router
