@@ -118,5 +118,4 @@ router.get('/:blogid/deletePost', function(req, res, next) {
 
 // TODO: admin delete all blogs (stretch)
 
-
 module.exports = router
