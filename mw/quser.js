@@ -4,31 +4,32 @@ const bcrypt = require('bcrypt')
 const knex = require('./db/knex.js')
 
 //Query user db
-hashPassord(password) => {
+function hashPassword(password) {
   return bcrypt.hashSync(password, 10)
 }
 
-findUser(username) => {
+function findUser(username) {
   return knex('user')
     .select('username')
-    .where('user name', username).first()
+    .where('user name', username)
+    .first()
 }
 
-findUserInfo(username) => {
+function findUserInfo(username) {
   return knex('user')
     .select('id', 'username', 'fullName')
     .where('username', username)
     .first()
 }
 
-findHashedPassword(username) => {
+function findHashedPassword(username) {
   return knex('user')
     .select('user.password')
     .where('user.username', username)
     .first()
 }
 
-authenticateUser(username, password) => {
+function authenticateUser(username, password) {
   return findUser(username)
     .then((userData) => {
       if (!userData) {
@@ -42,7 +43,7 @@ authenticateUser(username, password) => {
     })
 }
 
-addUser(username, password, fullname) => {
+function addUser(username, password, fullname) {
   if (!username || !password || !fullName) {
     return false
   }
@@ -51,12 +52,13 @@ addUser(username, password, fullname) => {
       if (data) {
         return false
       }
-      return knew('user').insert({
-        username: username,
-        password: hashPassword(password),
-        admin: true,
-        fullName: fullName
-      })
+      return knew('user')
+        .insert({
+          username: username,
+          password: hashPassword(password),
+          admin: true,
+          fullName: fullName
+        })
     })
     .catch((err) => {
       return err
