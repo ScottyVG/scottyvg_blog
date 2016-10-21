@@ -5,9 +5,7 @@ var quser = require('../mw/quser.js');
 var qblog = require('../mw/qblog.js');
 var qcomment = require('../mw/qcomment.js');
 
-// Home Page //
-//-----------//
-// Get Blogs //
+// Get All Blogs
 router.get('/', function(req, res, next) {
   qblog.getAllBlogs()
     .then(function(blogData) {
@@ -17,14 +15,12 @@ router.get('/', function(req, res, next) {
     });
 });
 
-// Register //
-//-----------//
-// Render Register Page //
+// Render - Register Page
 router.get('/register', function(req, res, next) {
   res.render('register');
 });
 
-// Post - Register Information //
+// Post - Register Info
 router.post('/register', function(req, res, next) {
   quser.addUser(req.body.username, req.body.password, req.body.fullName)
     .then(function() {
@@ -39,29 +35,24 @@ router.post('/register', function(req, res, next) {
     });
 });
 
-// Login //
-//--------//
-// Render Login Page //
+// Render - Login Page
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-// Post - Login Information //
+// Post - Login Information
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/post',
   failureRedirect: '/login'
 }));
 
-//---------------//
-// Logout //
+// Logout
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/login');
 });
 
-// Post Article //
-//--------------//
-// Render Post Article Page//
+// Render - Post Article Page
 router.get('/post', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -72,7 +63,7 @@ router.get('/post', function(req, res, next) {
   });
 });
 
-// Post - Post Article//
+// Post - Post Article
 router.post('/post', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -87,8 +78,7 @@ router.post('/post', function(req, res, next) {
     });
 });
 
-//---------------//
-// Get One Blog //
+// Get Single Blog
 router.get('/:blogid', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -108,8 +98,7 @@ router.get('/:blogid', function(req, res, next) {
     });
 });
 
-//----------------------------//
-// Create Comment On One Blog //
+// Post Comment on Blog
 router.post('/:blogid', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -125,9 +114,7 @@ router.post('/:blogid', function(req, res, next) {
     });
 });
 
-// Edit One Blog //
-//---------------//
-// Render the Edit Page for particular blog //
+// Render - Edit Page for blog
 router.get('/:blogid/editPost', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -152,7 +139,7 @@ router.get('/:blogid/editPost', function(req, res, next) {
     });
 });
 
-// Edit One Blog //
+// Edit blog post
 router.post('/:blogid/editPost', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -165,8 +152,7 @@ router.post('/:blogid/editPost', function(req, res, next) {
     });
 });
 
-//------------------//
-// Delete One Blog //
+// Delete blog post
 router.get('/:blogid/deletePost', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -195,9 +181,7 @@ router.get('/:blogid/deletePost', function(req, res, next) {
     });
 });
 
-// Edit One Comment on One Blog //
-//-------------------------------//
-// Render Edit Page for One Comment on One Blog //
+// Render - Edit Page for One Comment on One Blog
 router.get('/:blogid/:commentid/editComment', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -226,7 +210,7 @@ router.get('/:blogid/:commentid/editComment', function(req, res, next) {
     });
 });
 
-// Post - Edit One Comment on One Blog //
+// Post - Edit Comment
 router.post('/:blogid/:commentid/editComment', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -239,8 +223,8 @@ router.post('/:blogid/:commentid/editComment', function(req, res, next) {
     });
 });
 
-//---------------------------------//
-// Delete One Comment on One Blog //
+
+// Delete Comment
 router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
   if (!req.isAuthenticated()) {
     res.redirect('/login');
@@ -265,13 +249,6 @@ router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
         });
     });
 });
-
-
-
-
-
-
-
 
 
 module.exports = router;

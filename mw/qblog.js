@@ -55,7 +55,7 @@ function editBlogPost(blogs_id, title, content, image, snippet) {
       title: title,
       content: content,
       imageURL: image,
-      snippet: content.substring(0, 200) + '...'
+      snippet: `${content.substring(0, 200)} + ...`
     })
     .where('id', blogs_id)
 }
