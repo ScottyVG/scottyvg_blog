@@ -9,6 +9,7 @@ const qcomment = require('../mw/qcomment')
 
 // Post - Create comment on blog
 router.post('/:blogid', function(req, res, next) {
+  console.log('router.post /:blogid - comment route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -25,6 +26,7 @@ router.post('/:blogid', function(req, res, next) {
 
 // Render - Edit comment on the blog
 router.get('/:blogid/:commentid/editComment', function(req, res, next) {
+  console.log('router.get /:blogid/:commentid/editComment - comment route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -51,6 +53,7 @@ router.get('/:blogid/:commentid/editComment', function(req, res, next) {
 
 // Post - Edit comment on the blog
 router.post('/:blogid/:commentid/editComment', function(req, res, next) {
+  console.log('router.post /:blogid/:commentid/editComment - comment route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -64,6 +67,7 @@ router.post('/:blogid/:commentid/editComment', function(req, res, next) {
 
 // Delete comment on blog
 router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
+  console.log('router.get /:blogid/:commentid/deleteComment - comment route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return

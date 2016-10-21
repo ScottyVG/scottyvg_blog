@@ -1,49 +1,48 @@
 'use strict'
 
-const bcrypt = require('bcrypt')
 const knex = require('../db/knex.js')
 
 //Query Comment db
-function getComments(blog_id) {
-  return knex('comment')
-    .select('comment.id AS comment_id', 'comment.blog_id', 'user.fullName AS comment_user', 'comment.content as comment_content', 'user.id AS user_id')
-    .innerJoin('user', 'comment.user_id', 'user.id')
-    .where('comment.blog_id', blog_id)
-    .orderBy('comment.id', 'desc');
+function getComments(blogs_id) {
+  return knex('comments')
+    .select('comments.id AS comments_id', 'comments.blogs_id', 'user.fullName AS comments_user', 'comments.content as comments_content', 'user.id AS users_id')
+    .innerJoin('users', 'comments.users_id', 'user.id')
+    .where('comments.blogs_id', blogs_id)
+    .orderBy('comments.id', 'desc');
 }
 
-function getCommentsByID(comment) {
-  return knex('comment')
-    .select('id AS comment_id', 'blog_id', 'content AS comment_content', 'user_id')
+function getCommentsByID(comments) {
+  return knex('comments')
+    .select('id AS comments_id', 'blogs_id', 'content AS comments_content', 'user_id')
     .where('id', comment_id)
 }
 
-function createComment(user_id, blog_id, content, user_fullName) {
-  return knex('comment')
+function createComment(users_id, blogs_id, content, users_fullName) {
+  return knex('comments')
     .insert({
-      user_id: user_id,
-      blog_id: blog_id,
+      users_id: users_id,
+      blogs_id: blogs_id,
       content: content,
-      user_fullName: user_fullName
+      users_fullName: users_fullName
     })
 }
 
-function editComment(comment_id, content) {
-  return knex('comment').update({
+function editComment(comments_id, content) {
+  return knex('comments').update({
       content: content
     })
-    .where('id', comment_id)
+    .where('id', comments_id)
 }
 
-function deleteComment(comment_id) {
-  return knex('comment')
-    .where('id', comment_id)
+function deleteComment(comments_id) {
+  return knex('comments')
+    .where('id', comments_id)
     .del()
 }
 
-function deleteComments(blog_id) {
-  return knex('comment')
-    .where('blog_id', blog_id)
+function deleteComments(blogs_id) {
+  return knex('comments')
+    .where('blogs_id', blogs_id)
     .del()
 }
 

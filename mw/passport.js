@@ -4,7 +4,7 @@ const passport = require('passport')
 const Local = require('passport-local')
 const quser = require('./quser.js')
 
-passport.use(new Local(function(username, passord, done) {
+passport.use(new Local(function(username, password, done) {
   quser.authenticateUser(username, password)
     .then(function(verified) {
       if (!verified) {

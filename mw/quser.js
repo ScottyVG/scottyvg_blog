@@ -9,21 +9,21 @@ function hashPassword(password) {
 }
 
 function findUser(username) {
-  return knex('user')
+  return knex('users')
     .select('username')
-    .where('user name', username)
+    .where('username', username)
     .first()
 }
 
 function findUserInfo(username) {
-  return knex('user')
+  return knex('users')
     .select('id', 'username', 'fullName')
     .where('username', username)
     .first()
 }
 
 function findHashedPassword(username) {
-  return knex('user')
+  return knex('users')
     .select('user.password')
     .where('user.username', username)
     .first()
@@ -52,7 +52,7 @@ function addUser(username, password, fullname) {
       if (data) {
         return false
       }
-      return knew('user')
+      return knex('users')
         .insert({
           username: username,
           password: hashPassword(password),

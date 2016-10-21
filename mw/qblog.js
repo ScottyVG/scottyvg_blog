@@ -1,66 +1,65 @@
 'use strict'
 
-const bcrypt = require('bcrypt')
 const knex = require('../db/knex.js')
 
 //Query Blog db
 function getAllBlogs() {
-  return knex('blog')
-    .select('id AS blog_id', 'title', 'snippet', 'imageURL', 'user_fullName')
+  return knex('blogs')
+    .select('id AS blogs_id', 'title', 'snippet', 'imageURL', 'users_fullName')
     .orderBy('id', 'desc')
 }
 
 function getBlogByID(id) {
-  return knex('blog')
-    .select('id', 'title', 'content AS blogContent', 'user_id', 'imageURL', 'user_fullName')
+  return knex('blogs')
+    .select('id', 'title', 'content AS blogsContent', 'users_id', 'imageURL', 'users_fullName')
     .where('id', id)
 }
 
 function getBlogWithCommentByBlogID(id) {
-  return knex('blog')
-    .select('blog.id AS blog_id', 'blog.title', 'blog.content AS blogContent', 'blog.imageURL', 'comment.id AS comment_id', 'comment.user_id AS comment_user', 'comment.content AS comment_content')
-    .fullOuterJoin('comment', 'blog.id', 'comment.blog_id')
-    .where('blog.id', id)
+  return knex('blogs')
+    .select('blogs.id AS blogs_id', 'blogs.title', 'blogs.content AS blogsContent', 'blogs.imageURL', 'comments.id AS comments_id', 'comments.users_id AS comments_user', 'comments.content AS comments_content')
+    .fullOuterJoin('comments', 'blogs.id', 'comments.blogs_id')
+    .where('blogs.id', id)
 }
 
 function getBlogByTitle(title) {
-  return knex('blog')
+  return knex('blogs')
     .select('id')
     .where('title', title)
 }
 
 function getBlogByTitle(title) {
-  return knex('blog')
+  return knex('blogs')
     .select('id')
     .where('title', title)
 }
 
-function createBlogPost(title, content, image, user_id, user_fullname, snippet) {
-  return knex('blog')
+function createBlogPost(title, content, image, users_id, users_fullname, snippet) {
+  return knex('blogs')
     .insert({
       title: title,
       content: content,
       imageURL: image,
-      user_id: user_id,
-      user_fullName: user_fullName,
+      users_id: users_id,
+      users_fullName: users_fullName,
       snippet: content.substring(0, 200) + '...'
     })
 }
 
-function editBlogPost(blog_id, title, content, image, snippet) {
-  return knex('blog')
+function editBlogPost(blogs_id, title, content, image, snippet) {
+  return knex('blogs')
     .update({
       title: title,
       content: content,
       imageURL: image,
       snippet: content.substring(0, 200) + '...'
     })
-    .where('id', blog_id)
+    .where('id', blogs_id)
 }
 
-function deleteBlogPost(blog_id) {
-  return knex('blog')
-    .where('id', blog_id)
+function deleteBlogPost(blogs_id) {
+  return knex('blogs')
+    .where('id', blogs_id)
     .del()
 }
 

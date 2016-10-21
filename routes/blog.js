@@ -8,7 +8,8 @@ const qblog = require('../mw/qblog')
 const qcomment = require('../mw/qcomment')
 
 // Render - Post Article
-router.get('/post', function(req, res, next) {
+router.get('/', function(req, res, next) {
+  console.log('router.get / - blog route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -19,7 +20,8 @@ router.get('/post', function(req, res, next) {
 })
 
 // Post - Post Article
-router.post('/post', function(req, res, next) {
+router.post('/', function(req, res, next) {
+  console.log('router.post / - blog route');
   if (!req.isAuthenticated()) {
     res.redirect('login')
     return
@@ -35,6 +37,7 @@ router.post('/post', function(req, res, next) {
 
 // Get - One Blog
 router.get('/:blogid', function(req, res, next) {
+  console.log('router.get /:blogid - blog route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -55,6 +58,7 @@ router.get('/:blogid', function(req, res, next) {
 
 // Render - Edit Blog
 router.get('/:blogid/editPost', function(req, res, next) {
+  console.log('router.get /:blogid/editPost - blog route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -80,6 +84,7 @@ router.get('/:blogid/editPost', function(req, res, next) {
 
 // Post - Edit Blog
 router.post('/:blogid/editPost', function(req, res, next) {
+  console.log('router.post /:blogid/editPost - blog route');
   if (!req.isAuthenticated()) {
     res.redirect('/login')
     return
@@ -93,8 +98,9 @@ router.post('/:blogid/editPost', function(req, res, next) {
 
 // Delete Blog Post
 router.get('/:blogid/deletePost', function(req, res, next) {
+  console.log('router.get /:blogid/deletePost - blog route');
   if (!req.isAuthenticated()) {
-    res.reirect('/login')
+    res.redirect('/login')
     return
   }
   let url = '/' + req.params.blogid

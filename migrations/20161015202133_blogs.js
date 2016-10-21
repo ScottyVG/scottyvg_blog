@@ -1,12 +1,12 @@
 'use strict'
 
 exports.up = (knex, Promise) => {
-  return knex.schema.createTable('blog', (table) => {
+  return knex.schema.createTable('blogs', (table) => {
     table.increments()
     table.string('title')
     table.text('content')
-    table.integer('user_id').references('id').inTable('user')
-    table.string('user_fullName')
+    table.integer('users_id').references('id').inTable('users')
+    table.string('users_fullName')
     table.text('snippet')
     table.string('imageURL')
     table.timestamps(null, true)
@@ -14,5 +14,5 @@ exports.up = (knex, Promise) => {
 }
 
 exports.down = (knex, Promise) => {
-  return knex.schema.dropTable('blog')
+  return knex.schema.dropTable('blogs')
 }
