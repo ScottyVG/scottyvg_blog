@@ -2,6 +2,8 @@
 
 const bcrypt = require('bcrypt')
 const knex = require('../db/knex.js')
+const qblog = require('./qblog.js')
+const qcomment = require('./qcomment.js')
 
 //Query user db
 function hashPassword(password) {

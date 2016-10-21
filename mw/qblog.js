@@ -1,6 +1,9 @@
 'use strict'
 
+const bcrypt = require('bcrypt')
 const knex = require('../db/knex.js')
+const quser = require('./quser.js')
+const qcomment = require('./qcomment.js')
 
 //Query Blog db
 function getAllBlogs() {

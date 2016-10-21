@@ -3,6 +3,9 @@
 const passport = require('passport')
 const Local = require('passport-local')
 const quser = require('./quser.js')
+const qblog = require('./qblog.js')
+const qcomment = require('./qcomment.js')
+const bcrypt = require('bcrypt')
 
 passport.use(new Local(function(username, password, done) {
   quser.authenticateUser(username, password)
