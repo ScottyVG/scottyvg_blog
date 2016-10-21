@@ -3,9 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('../mw/passport')
-const quser = require('../mw/quser')
-const qblog = require('../mw/qblog')
-const qcomment = require('../mw/qcomment')
+const api = require('../mw/api')
 
 // Post - Create comment on blog
 router.post('/:blogid', function(req, res, next) {
@@ -15,9 +13,9 @@ router.post('/:blogid', function(req, res, next) {
     return
   }
   let url = `/ ${req.params.blogid}`
-  quser.findUserInfo(req.user.username)
+  api.findUserInfo(req.user.username)
     .then(function(userInfo) {
-      qcomment.createComment(userInfo.id, req.params.blogid, req.body.comment, userInfo.fullName)
+      api.createComment(userInfo.id, req.params.blogid, req.body.comment, userInfo.fullName)
         .then(
           res.redirect(url)
         )
@@ -32,7 +30,7 @@ router.get('/:blogid/:commentid/editComment', function(req, res, next) {
     return
   }
   let url = `/ ${req.params.blogid}`
-  quser.findUserInfo(req.user.username)
+  api.findUserInfo(req.user.username)
     .then(function(userInfo) {
       qblgo.getBlogByID(req.params.blogid)
         .then(function(blogInfo) {
@@ -59,7 +57,7 @@ router.post('/:blogid/:commentid/editComment', function(req, res, next) {
     return
   }
   let url = `/ ${req.params.blogid}`
-  qcomment.editComment(req.params.commentid, req.body.commentEdit)
+  api.editComment(req.params.commentid, req.body.commentEdit)
     .then(function() {
       res.redirect(url)
     })
@@ -73,9 +71,9 @@ router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
     return
   }
   let url = `/`
-  quser.findUserInfo(req.user.username)
+  api.findUserInfo(req.user.username)
     .then(function(userInfo) {
-      qcomment.getCommentsByID(req.params.commentid)
+      api.getCommentsByID(req.params.commentid)
         .then(function(commentById) {
           if (userInfo.id !== commentById[0].user_id) {
             res.render('error', {
@@ -84,7 +82,7 @@ router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
             })
             return
           }
-          qcomment(req.params.commentid)
+          api(req.params.commentid)
             .then(function() {
               res.redirect(url)
             })

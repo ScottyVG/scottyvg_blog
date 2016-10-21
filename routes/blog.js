@@ -3,9 +3,8 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('../mw/passport')
-const quser = require('../mw/quser')
-const qblog = require('../mw/qblog')
-const qcomment = require('../mw/qcomment')
+const api = require('../mw/api')
+
 
 // Render - Post Article
 router.get('/', function(req, res, next) {
@@ -26,9 +25,9 @@ router.post('/', function(req, res, next) {
     res.redirect('login')
     return
   }
-  quser.findUserInfo(req.user.username)
+  api.findUserInfo(req.user.username)
     .then(function(userInfo) {
-      quser.createPost(req.body.title, req.body.content, req.body.image, userInfo.id, userInfo.fullName)
+      api.createPost(req.body.title, req.body.content, req.body.image, userInfo.id, userInfo.fullName)
         .then(function() {
           res.redirect('/')
         })
@@ -43,9 +42,9 @@ router.get('/:blogid', function(req, res, next) {
     return
   }
   let authorized = false
-  qblog.getBlogByID(req.params.blogid)
+  api.getBlogByID(req.params.blogid)
     .then(function(blogInfo) {
-      qcomment.getComments(req.params.blogid)
+      api.getComments(req.params.blogid)
         .then(function(comments) {
           res.render('blog', {
             blog_id: req.params.blogid,
@@ -64,9 +63,9 @@ router.get('/:blogid/editPost', function(req, res, next) {
     return
   }
   let url = `/ ${req.params.blogid}`
-  quser.findUserInformation(req.user.username)
+  api.findUserInformation(req.user.username)
     .then(function(userInfo) {
-      qblog.getBlogById(req.params.blogid)
+      api.getBlogById(req.params.blogid)
         .then(function(blogInfo) {
           if (userInfo.id !== blogInfo[0].user_id) {
             res.render('error', {
@@ -90,7 +89,7 @@ router.post('/:blogid/editPost', function(req, res, next) {
     return
   }
   let url = `/ ${req.params.blogid}`
-  qblog.editBlogPost(req.params.blogid, req.ody.title, req.body.content, req.body.image)
+  api.editBlogPost(req.params.blogid, req.ody.title, req.body.content, req.body.image)
     .then(function() {
       res.redirect(url)
     })
@@ -104,7 +103,7 @@ router.get('/:blogid/deletePost', function(req, res, next) {
     return
   }
   let url = '/' + req.params.blogid
-  quser.findUserInformation(req.user.username)
+  api.findUserInformation(req.user.username)
     .then(function(userInfo) {
       if (userInfo.id !== blogInfo[0].user_id) {
         res.render('error', {
@@ -113,8 +112,8 @@ router.get('/:blogid/deletePost', function(req, res, next) {
         })
         return
       }
-      qcomment.deleteComments(req.params.blogid).then(function() {
-        qblog.deleteBlogPost(req.params.blogid)
+      api.deleteComments(req.params.blogid).then(function() {
+        api.deleteBlogPost(req.params.blogid)
           .then(function() {
             res.redirect('/')
           })

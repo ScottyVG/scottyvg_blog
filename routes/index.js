@@ -1,13 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('../mw/passport.js');
-var quser = require('../mw/quser.js');
-var qblog = require('../mw/qblog.js');
-var qcomment = require('../mw/qcomment.js');
+var express = require('express')
+var router = express.Router()
+var passport = require('../mw/passport')
+var api = require('../mw/api')
 
 // Get All Blogs
 router.get('/', function(req, res, next) {
-  qblog.getAllBlogs()
+  api.getAllBlogs()
     .then(function(blogData) {
       res.render('index', {
         blogs: blogData
@@ -22,7 +20,7 @@ router.get('/register', function(req, res, next) {
 
 // Post - Register Info
 router.post('/register', function(req, res, next) {
-  quser.addUser(req.body.username, req.body.password, req.body.fullName)
+  api.addUser(req.body.username, req.body.password, req.body.fullName)
     .then(function() {
       res.redirect('/login');
     })
@@ -69,9 +67,9 @@ router.post('/post', function(req, res, next) {
     res.redirect('/login');
     return;
   }
-  quser.findUserInfo(req.users.username)
+  api.findUserInfo(req.users.username)
     .then(function(userInfo) {
-      qblog.createPost(req.body.title, req.body.content, req.body.image, userInfo.id, userInfo.fullName)
+      api.createPost(req.body.title, req.body.content, req.body.image, userInfo.id, userInfo.fullName)
         .then(function() {
           res.redirect('/');
         });
@@ -85,9 +83,9 @@ router.get('/:blogid', function(req, res, next) {
     return;
   }
   var authorized = false;
-  qblog.getBlogByID(req.params.blogid)
+  api.getBlogByID(req.params.blogid)
     .then(function(blogInfo) {
-      qcomment.getComments(req.params.blogid)
+      api.getComments(req.params.blogid)
         .then(function(comments) {
           res.render('blog', {
             blogs_id: req.params.blogid,
@@ -105,9 +103,9 @@ router.post('/:blogid', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  qblog.findUserInfo(req.users.username)
+  api.findUserInfo(req.users.username)
     .then(function(userInfo) {
-      qcomment.createComment(userInfo.id, req.params.blogid, req.body.comment, userInfo.fullName)
+      api.createComment(userInfo.id, req.params.blogid, req.body.comment, userInfo.fullName)
         .then(
           res.redirect(url)
         );
@@ -121,9 +119,9 @@ router.get('/:blogid/editPost', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  quser.findUserInfo(req.users.username)
+  api.findUserInfo(req.users.username)
     .then(function(userInfo) {
-      qblog.getBlogByID(req.params.blogid)
+      api.getBlogByID(req.params.blogid)
         .then(function(blogInfo) {
           if (userInfo.id !== blogInfo[0].users_id) {
             res.render('error', {
@@ -146,7 +144,7 @@ router.post('/:blogid/editPost', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  qblog.editBlogPost(req.params.blogid, req.body.title, req.body.content, req.body.image)
+  api.editBlogPost(req.params.blogid, req.body.title, req.body.content, req.body.image)
     .then(function() {
       res.redirect(url);
     });
@@ -159,9 +157,9 @@ router.get('/:blogid/deletePost', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  quser.findUserInfo(req.users.username)
+  api.findUserInfo(req.users.username)
     .then(function(userInfo) {
-      qblog.getBlogByID(req.params.blogid)
+      api.getBlogByID(req.params.blogid)
         .then(function(blogInfo) {
           if (userInfo.id !== blogInfo[0].users_id) {
             res.render('error', {
@@ -170,9 +168,9 @@ router.get('/:blogid/deletePost', function(req, res, next) {
             });
             return;
           }
-          qcomment.deleteComments(req.params.blogid)
+          api.deleteComments(req.params.blogid)
             .then(function() {
-              qblog.deleteBlogPost(req.params.blogid)
+              api.deleteBlogPost(req.params.blogid)
                 .then(function() {
                   res.redirect('/');
                 });
@@ -188,11 +186,11 @@ router.get('/:blogid/:commentid/editComment', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  quser.findUserInfo(req.users.username)
+  api.findUserInfo(req.users.username)
     .then(function(userInfo) {
-      qblog.getBlogByID(req.params.blogid)
+      api.getBlogByID(req.params.blogid)
         .then(function(blogInfo) {
-          qblog.getCommentsByID(req.params.commentid)
+          api.getCommentsByID(req.params.commentid)
             .then(function(commentById) {
               if (userInfo.id !== commentById[0].users_id) {
                 res.render('error', {
@@ -217,7 +215,7 @@ router.post('/:blogid/:commentid/editComment', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  qcomment.editComment(req.params.commentid, req.body.commentEdit)
+  api.editComment(req.params.commentid, req.body.commentEdit)
     .then(function() {
       res.redirect(url);
     });
@@ -231,9 +229,9 @@ router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
     return;
   }
   var url = '/' + req.params.blogid;
-  quser.findUserInfo(req.users.username)
+  api.findUserInfo(req.users.username)
     .then(function(userInfo) {
-      qcomment.getCommentsByID(req.params.commentid)
+      api.getCommentsByID(req.params.commentid)
         .then(function(commentById) {
           if (userInfo.id !== commentById[0].users_id) {
             res.render('error', {
@@ -242,7 +240,7 @@ router.get('/:blogid/:commentid/deleteComment', function(req, res, next) {
             });
             return;
           }
-          qcomment.deleteComment(req.params.commentid)
+          api.deleteComment(req.params.commentid)
             .then(function() {
               res.redirect(url);
             });
@@ -261,11 +259,11 @@ module.exports = router;
 // const user = require('./user')
 // const blog = require('./blog')
 // const comment = require('./comment')
-// const qblog = require('../mw/qblog')
+// const api = require('../mw/api')
 //
 // router.get('/', function(req, res, next) {
 //   console.log('router.get /');
-//   qblog.getAllBlogs()
+//   api.getAllBlogs()
 //     .then(function(blogData) {
 //       res.render('index', {
 //         blog: blogData

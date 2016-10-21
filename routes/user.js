@@ -3,7 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('../mw/passport')
-const quser = require('../mw/quser')
+const api = require('../mw/api')
 
 // Render - Register Page
 router.get('/register', function(req, res, next) {
@@ -14,7 +14,7 @@ router.get('/register', function(req, res, next) {
 // Post - Register Info
 router.post('/register', function(req, res, next) {
   console.log('router.post /register - user route');
-  quser.addUser(req.body.username, req.body.password, req.body.fullName)
+  api.addUser(req.body.username, req.body.password, req.body.fullName)
     .then(function() {
       res.redirect('/login')
     })
