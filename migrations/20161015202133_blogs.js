@@ -5,10 +5,8 @@ exports.up = (knex, Promise) => {
     table.increments()
     table.string('title')
     table.text('content')
-    table.integer('users_id').references('id').inTable('users')
-    table.string('users_fullName')
-    table.text('snippet')
     table.string('imageURL')
+    table.integer('users_id').references('id').inTable('users')
     table.timestamps(null, true)
   })
 }

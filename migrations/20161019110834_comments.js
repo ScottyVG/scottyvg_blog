@@ -6,7 +6,6 @@ exports.up = (knex, Promise) => {
     table.integer('users_id').references('id').inTable('users')
     table.integer('blogs_id').references('id').inTable('blogs')
     table.text('content')
-    table.string('users_fullName')
     table.timestamps(null, true)
   })
 }

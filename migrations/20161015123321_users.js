@@ -5,10 +5,7 @@ exports.up = (knex, Promise) => {
     table.increments()
     table.string('username')
     table.string('password')
-    table.boolean('admin')
-    table.text('fullName')
-    table.text('avatarURL')
-    table.text('bio')
+    table.text('profpicURL')
     table.timestamps()
   })
 }

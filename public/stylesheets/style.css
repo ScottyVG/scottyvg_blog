@@ -1,187 +1,46 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+/*Site Styles*/
+
+.nav-custom {
+  padding-left: 20px;
 }
 
-.col-lg-12 {
-  border: 1px solid lightgrey;
-  padding: 5px;
-}
-
-
-/*Layout*/
-
-.title, .register, .login, .blogs, .error {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.title {
-  margin-bottom: 50px;
-  font-size: 5vw;
-}
-
-.navigation {
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
-  padding: 10px 0 10px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.navigationList {
-  margin: 0;
-}
-
-.navList {
-  list-style: none;
-  display: inline;
-  padding-left: 0;
-  padding-right: 40px;
-}
-
-.navLink {
-  text-decoration: none;
-  color: grey;
-  justify-content: center;
-  align-items: center;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.navLink:hover {
-  color: black;
-}
-
-a {
-  color: #00B7FF;
+.container-custom {
+  margin-top: 30px;
 }
 
 
-/*Login & Register*/
+/*User Styles*/
 
-.register, .login {
-  margin: 20px;
-}
-
-.textInput {
-  margin: 20px;
+.user-image {
+  width: 100px;
+  height: 100px;
 }
 
 
-/*Index.hbs*/
+/*Post Styles*/
 
-.blogTitle, .author {
-  margin-bottom: 10px;
+.post-container {
+  margin: 50px 0;
 }
 
-.blogImage {
-  width: 500px;
+.post-image {
+  width: 100%;
   height: auto;
+}
+
+.user-container {
+  padding: 10px;
   margin-bottom: 20px;
 }
 
-.blogBorder {
-  border: none;
-  border-bottom: 1px solid lightgrey;
-  text-align: center;
-}
 
-.content {
-  width: 60%;
-  font-size: 3.5vmin;
-  line-height: 1.5;
-  text-align: justify;
-  white-space: pre-line;
-}
-
-
-/*Blog.hbs*/
-
-
-/*edit.hbs*/
-
-
-/*comment.hbs*/
-
-.commentHeader {
-  border: none;
-  font-size: 3.5vmin;
-  margin-top: 50px;
-  padding-top: 20px;
-  border-top: 1px solid lightgrey;
-}
+/*Comments Styles*/
 
 .comments {
-  border: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-  margin-bottom: 20px;
-  padding: 10px 20px 10px 20px;
+  margin-left: 40px;
 }
 
-.noComments {
-  border: none;
-  font-size: 2vw;
-  border-bottom: 1px solid lightgrey;
-  padding-bottom: 20px;
-}
-
-.commentUser {
-  font-size: 3vmin;
-}
-
-.newComment {
-  margin-top: 20px;
-}
-
-.commentContent {
-  font-size: 2.5vmin;
-  white-space: pre-line;
-}
-
-.commentArea {
-  border: 1px solid lightgrey;
-  padding: 5px 0 0 5px;
-}
-
-.submitComment, .cancel, .submitEdit, .submit {
-  margin-top: 20px;
-  padding: 10px;
-}
-
-.commentForm, .post {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-label {
-  margin: 10px 0 10px 0;
-  font-size: 3vmin;
-  padding-left: 0;
-}
-
-
-/*Chat*/
-
-.messages {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.messages li {
-  padding: 5px 10px;
-}
-
-.messages li:nth-child(odd) {
-  background: #eee;
+.comment-author {
+  font-weight: 700;
+  margin-bottom: -10px;
 }
