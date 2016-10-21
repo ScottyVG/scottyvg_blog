@@ -43,7 +43,7 @@ function authenticateUser(username, password) {
     })
 }
 
-function addUser(username, password, fullname) {
+function addUser(username, password, fullName) {
   if (!username || !password || !fullName) {
     return false
   }

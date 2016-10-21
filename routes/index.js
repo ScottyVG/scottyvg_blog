@@ -1,7 +1,7 @@
-var express = require('express')
-var router = express.Router()
-var passport = require('../mw/passport')
-var api = require('../mw/api')
+const express = require('express')
+const router = express.Router()
+const passport = require('../mw/passport')
+const api = require('../mw/api')
 
 // Get All Blogs
 router.get('/', function(req, res, next) {
