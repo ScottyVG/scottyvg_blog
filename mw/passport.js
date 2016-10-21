@@ -3,12 +3,11 @@
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const Local = require('passport-local')
-const quser = require('./quser.js')
-const qblog = require('./qblog.js')
-const qcomment = require('./qcomment.js')
+const api = require('./api')
+
 
 passport.use(new Local(function(username, password, done) {
-  quser.authenticateUser(username, password)
+  api.authenticateUser(username, password)
     .then(function(verified) {
       if (!verified) {
         //Throw Error
@@ -16,7 +15,7 @@ passport.use(new Local(function(username, password, done) {
         done(new Error('Access Error: Incorrect username and/or password'))
         return
       }
-      quser.findUser(username)
+      api.findUser(username)
         .then(function(user) {
           done(null, user)
         })
@@ -28,7 +27,7 @@ passport.serializeUser(function(user, done) {
 })
 
 passport.deserializeUser(function(username, done) {
-  quser.findUser(username)
+  api.findUser(username)
     .then(function(user) {
       done(null, user)
     })

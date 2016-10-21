@@ -22,7 +22,7 @@ router.get('/register', function(req, res, next) {
 router.post('/register', function(req, res, next) {
   api.addUser(req.body.username, req.body.password, req.body.fullName)
     .then(function() {
-      res.redirect('/login');
+      res.redirect('/');
     })
     .catch(function(err) {
       res.render('error', {
