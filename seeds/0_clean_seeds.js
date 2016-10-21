@@ -1,9 +1,6 @@
-'use strict'
-
-exports.seed = (knex, Promise) => {
+exports.seed = function(knex, Promise) {
   return Promise.all([
-    knex('comments').del(),
-    knex('blogs').del(),
+    knex('posts').del(),
     knex('users').del(),
   ])
 }
