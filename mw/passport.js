@@ -5,6 +5,16 @@ const passport = require('passport')
 const Local = require('passport-local')
 const api = require('./api')
 
+passport.serializeUser(function(user, done) {
+  done(null, user.username)
+})
+
+passport.deserializeUser(function(username, done) {
+  api.findUser(username)
+  .then(function(user) {
+    done(null, user)
+  })
+})
 
 passport.use(new Local(function(username, password, done) {
   api.authenticateUser(username, password)
@@ -22,15 +32,5 @@ passport.use(new Local(function(username, password, done) {
     })
 }))
 
-passport.serializeUser(function(user, done) {
-  done(null, user.username)
-})
-
-passport.deserializeUser(function(username, done) {
-  api.findUser(username)
-    .then(function(user) {
-      done(null, user)
-    })
-})
 
 module.exports = passport
